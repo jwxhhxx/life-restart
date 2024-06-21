@@ -1,23 +1,21 @@
+// src/components/Plan/DayPlan.tsx
 import React, { useState, useEffect } from 'react';
 import { Plan } from '../util/types';
 import { loadPlans, savePlans } from '../util/utils';
-import { List, Button, Modal, Input, Checkbox, DatePicker, Upload, Calendar } from 'antd';
+import { List, Button, Modal, Input, Checkbox, DatePicker, Upload, Collapse } from 'antd';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { UploadFile, UploadProps } from 'antd/es/upload/interface';
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
+import './DayPlan.css';  // 用于自定义完成任务划掉的样式
 
-import 'dayjs/locale/zh-cn'; // 加载中文语言包
-dayjs.locale('zh-cn'); // 设置 dayjs 使用中文语言包
-
-const { RangePicker } = DatePicker;
+const { Panel } = Collapse;
 
 const DayPlan: React.FC = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentPlan, setCurrentPlan] = useState<Partial<Plan>>({});
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string>(dayjs().format('YYYY-MM-DD'));
 
   useEffect(() => {
     setPlans(loadPlans('dayPlans'));
@@ -61,8 +59,8 @@ const DayPlan: React.FC = () => {
 
   const toggleCompleted = (id: string) => {
     const timeSpent = prompt('Enter the time spent (in minutes):');
-    setPlans(plans.map(plan =>
-      plan.id === id
+    setPlans(plans.map(plan => 
+      plan.id === id 
         ? { ...plan, completed: !plan.completed, timeSpent: plan.completed ? undefined : parseInt(timeSpent || '0', 10) }
         : plan
     ));
@@ -94,26 +92,55 @@ const DayPlan: React.FC = () => {
     },
   };
 
+  // 按日期分组任务
+  const groupedPlans = plans.reduce((acc, plan) => {
+    const date = plan.date;
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+    acc[date].push(plan);
+    return acc;
+  }, {} as Record<string, Plan[]>);
+
   return (
-    <div>
-      <h2>Day Plan</h2>
-      <Button type="primary" icon={<PlusOutlined />} onClick={() => showModal()}>Add Plan</Button>
-      <List
-        dataSource={plans}
-        renderItem={plan => (
-          <List.Item actions={[
-            <Checkbox checked={plan.completed} onChange={() => toggleCompleted(plan.id)}>Completed</Checkbox>,
-            <Button onClick={() => showModal(plan)}>Edit</Button>,
-            <Button danger onClick={() => deletePlan(plan.id)}>Delete</Button>
-          ]}>
-            <List.Item.Meta
-              title={plan.title}
-              description={`${plan.description} - ${plan.date}`}
+    <div className="day-plan-container">
+      <div className="day-plan-header">
+        <h2>日任务</h2>
+        <Button type="primary" icon={<PlusOutlined />} onClick={() => showModal()}>新增任务</Button>
+      </div>
+      <Collapse defaultActiveKey={[...Object.keys(groupedPlans)]} style={{ marginTop: '20px' }}>
+        {Object.keys(groupedPlans).map(date => (
+          <Panel header={date} key={date}>
+            <List
+              dataSource={groupedPlans[date]}
+              renderItem={plan => (
+                <List.Item
+                  actions={[
+                    <Checkbox checked={plan.completed} onChange={() => toggleCompleted(plan.id)}>完成</Checkbox>,
+                    <Button onClick={() => showModal(plan)}>编辑</Button>,
+                    <Button danger onClick={() => deletePlan(plan.id)}>删除</Button>
+                  ]}
+                >
+                  <List.Item.Meta
+                    title={<span className={plan.completed ? 'completed' : ''}>{plan.title}</span>}
+                    description={
+                      <>
+                        {plan.description} - {plan.date}
+                        {plan.timeSpent !== undefined && (
+                          <div style={{ marginTop: '8px' }}>
+                            <span style={{ color: '#888' }}>时长: {plan.timeSpent} minutes</span>
+                          </div>
+                        )}
+                      </>
+                    }
+                  />
+                  {plan.imageUrl && <img src={plan.imageUrl} alt={plan.title} style={{ width: 100, height: 100 }} />}
+                </List.Item>
+              )}
             />
-            {plan.imageUrl && <img src={plan.imageUrl} alt={plan.title} style={{ width: 100, height: 100 }} />}
-          </List.Item>
-        )}
-      />
+          </Panel>
+        ))}
+      </Collapse>
       <Modal title="Plan" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <Input
           placeholder="Title"

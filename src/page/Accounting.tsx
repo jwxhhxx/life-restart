@@ -74,13 +74,13 @@ const Accounting: React.FC = () => {
   return (
     <div>
       <h1 style={{textAlign:'center'}}>总额:<span style={{color:totalAmount>10000?'green':'red'}}>{totalAmount}</span> 元</h1>
-      <Button type="primary" icon={<PlusOutlined />} onClick={showModal}>Add Entry</Button>
+      <Button type="primary" icon={<PlusOutlined />} onClick={showModal}>新 增</Button>
       <List
         dataSource={expenses}
         renderItem={expense => (
           <List.Item actions={[
-            <Button onClick={() => setCurrentExpense(expense)}>Edit</Button>,
-            <Button danger onClick={() => deleteExpense(expense.id)}>Delete</Button>
+            <Button onClick={() => setCurrentExpense(expense)}>编辑</Button>,
+            <Button danger onClick={() => deleteExpense(expense.id)}>删除</Button>
           ]}>
             <List.Item.Meta 
               title={`${expense.type} - ${expense.category}`} 

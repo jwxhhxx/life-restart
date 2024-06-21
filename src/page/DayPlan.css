@@ -1,0 +1,40 @@
+
+  .completed {
+    text-decoration: line-through;
+    color: #999;
+  }
+  
+  .day-plan-container {
+
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .day-plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ant-list-item-meta-title {
+    font-weight: bold;
+  }
+  
+  .ant-list-item-meta-description {
+    color: #595959;
+  }
+  
+  .ant-list-item {
+    background: #fff;
+    margin: 10px 0;
+    padding: 20px !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ant-collapse-content > .ant-collapse-content-box {
+    background-color: #ffffff;
+  }
+  
+
+  

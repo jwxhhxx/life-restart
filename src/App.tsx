@@ -11,6 +11,8 @@ import PlansPage from "./page/PlansPage";
 import AccountingPage from "./page/Accounting";
 import StatisticsPage from "./page/StatisticsPage";
 import WeightTracker from "./page/WeightTracker";
+import ReadingTracking from "./page/ReadingTracking";
+
 const { Header, Content, Footer } = Layout;
 
 const App: React.FC = () => {
@@ -25,6 +27,7 @@ const App: React.FC = () => {
               alt="Logo"
               style={{
                 width: "30px",
+                height:"30px",
                 borderRadius: "30px",
                 marginRight: "10px",
               }}
@@ -44,6 +47,9 @@ const App: React.FC = () => {
             <Menu.Item key="4" icon={<BarChartOutlined />}>
               <Link to="/weight">体重记录</Link>
             </Menu.Item>
+            <Menu.Item key="5" icon={<BarChartOutlined />}>
+              <Link to="/reading">阅读记录</Link>
+            </Menu.Item>
           </Menu>
         </Header>
         <Content style={{ padding: "0 50px" }}>
@@ -52,6 +58,7 @@ const App: React.FC = () => {
             <Route path="/plans" element={<PlansPage />} />
             <Route path="/Accounting" element={<AccountingPage />} />
             <Route path="/weight" element={<WeightTracker />} />
+            <Route path="/reading" element={<ReadingTracking />} />
           </Routes>
         </Content>
         <Footer style={{ textAlign: "center" }}>Life Planner ©2024</Footer>

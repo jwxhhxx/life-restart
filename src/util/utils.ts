@@ -1,4 +1,4 @@
-import { Plan,Expense } from "./types";
+import { Plan,Expense,ReadingEntry } from "./types";
 export const loadPlans = (key: string): Plan[] => {
     const plans = localStorage.getItem(key);
     return plans ? JSON.parse(plans) : [];
@@ -25,4 +25,12 @@ export const notify = (title: string, options?: NotificationOptions) => {
       }
     });
   }
+};
+export const loadReadingEntry = (key: string): ReadingEntry[] => {
+  const plans = localStorage.getItem(key);
+  return plans ? JSON.parse(plans) : [];
+};
+
+export const saveReadingEntry = (key: string, plans: ReadingEntry[]) => {
+  localStorage.setItem(key, JSON.stringify(plans));
 };

@@ -49,12 +49,12 @@ const YearPlan: React.FC = () => {
   return (
     <div>
       <h2>长期任务</h2>
-      <Button type="primary" icon={<PlusOutlined />} onClick={() => showModal()}>Add Plan</Button>
+      <Button type="primary" icon={<PlusOutlined />} onClick={() => showModal()}>新增任务</Button>
       <List
         dataSource={plans}
         renderItem={plan => (
           <List.Item actions={[
-            <Checkbox checked={plan.completed} onChange={() => toggleCompleted(plan.id)}>Completed</Checkbox>,
+            <Checkbox checked={plan.completed} onChange={() => toggleCompleted(plan.id)}>完成</Checkbox>,
             <Button onClick={() => showModal(plan)}>Edit</Button>,
             <Button danger onClick={() => deletePlan(plan.id)}>Delete</Button>
           ]}>
