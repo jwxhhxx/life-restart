@@ -12,6 +12,7 @@ import AccountingPage from "./page/Accounting";
 import StatisticsPage from "./page/StatisticsPage";
 import WeightTracker from "./page/WeightTracker";
 import ReadingTracking from "./page/ReadingTracking";
+import InspirationNote from "./page/InspirationNote";
 
 const { Header, Content, Footer } = Layout;
 
@@ -50,6 +51,9 @@ const App: React.FC = () => {
             <Menu.Item key="5" icon={<BarChartOutlined />}>
               <Link to="/reading">阅读记录</Link>
             </Menu.Item>
+            <Menu.Item key="6" icon={<BarChartOutlined />}>
+              <Link to="/inspirationNote">灵感纸条</Link>
+            </Menu.Item>
           </Menu>
         </Header>
         <Content style={{ padding: "0 50px" }}>
@@ -59,6 +63,7 @@ const App: React.FC = () => {
             <Route path="/Accounting" element={<AccountingPage />} />
             <Route path="/weight" element={<WeightTracker />} />
             <Route path="/reading" element={<ReadingTracking />} />
+            <Route path="/inspirationNote" element={<InspirationNote />} />
           </Routes>
         </Content>
         <Footer style={{ textAlign: "center" }}>Life Planner ©2024</Footer>

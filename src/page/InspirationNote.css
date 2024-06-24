@@ -1,0 +1,42 @@
+/* src/components/InspirationPage.css */
+.inspiration-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .inspiration-animation {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 170px;
+    animation: dropIn 3s forwards;
+  }
+  
+  @keyframes dropIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-200px) translateX(-50px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0) translateX(-50px);
+    }
+    45% {
+      opacity: 1;
+      transform: translateY(85px) translateX(-50px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(170px) translateX(-50px);
+    }
+  }
+  
+  .bottle{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 300px;
+  }

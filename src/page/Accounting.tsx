@@ -30,7 +30,7 @@ const Accounting: React.FC = () => {
       initialTotal=initialTotal+expenses[i].amount
     }
    }
-    setTotalAmount(initialTotal);
+    setTotalAmount(Number(initialTotal.toFixed(2)));
   }, [expenses]);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const Accounting: React.FC = () => {
     setIsModalVisible(false);
     setCurrentExpense({});
     // 更新总额
-    const newTotal = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+    const newTotal =Number(expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2));
     setTotalAmount(newTotal);
   };
   
@@ -61,7 +61,7 @@ const Accounting: React.FC = () => {
     // 删除条目的逻辑
     setExpenses(expenses.filter(expense => expense.id !== id));
     // 更新总额
-    const newTotal = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+    const newTotal = Number(expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2));
     setTotalAmount(newTotal);
   };
 
@@ -114,6 +114,7 @@ const Accounting: React.FC = () => {
             <Input
               type="number"
               value={currentExpense.amount}
+              step={0.1}
               onChange={e => setCurrentExpense({ ...currentExpense, amount: parseFloat(e.target.value) })}
             />
           </Form.Item>
