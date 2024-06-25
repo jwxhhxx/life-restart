@@ -28,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "release": "standard-version"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +53,7 @@
     "@types/chart.js": "^2.9.41",
     "@types/d3": "^7.4.3",
     "@types/react-router-dom": "^5.3.3",
-    "@types/uuid": "^9.0.8"
+    "@types/uuid": "^9.0.8",
+    "standard-version": "^9.5.0"
   }
 }
