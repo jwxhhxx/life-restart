@@ -1,0 +1,6 @@
+services:
+  life-restart:
+    image: life-restart:latest
+    ports:
+      - 10001:80
+    restart: always
