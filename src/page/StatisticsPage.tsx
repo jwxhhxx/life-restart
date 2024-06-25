@@ -6,27 +6,28 @@ import AccountingStatistics from './AccountingStatistics';
 import WeightStatic from './WeightStatic';
 import DayPlancalendar from './DayPlanCalendar';
 import DailyPlanStats from './DailyPlanStats'
+
 const StatisticsPage: React.FC = () => {
   return (
     <div>
-      <Row gutter={16}>
-      <Col span={12}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={24} md={12}>
           <DailyPlanStats />
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={24} md={12}>
           <DayPlancalendar />
         </Col>
       </Row>
-      <Row gutter={16}>
-        <Col span={12}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={24} md={12}>
           <Statistics />
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={24} md={12}>
           <AccountingStatistics />
         </Col>
       </Row>
-      <Row gutter={16}>
-        <Col span={12}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={24} md={12}>
           <WeightStatic />
         </Col>
       </Row>

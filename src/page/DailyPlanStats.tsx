@@ -6,6 +6,7 @@ import { Card, Row, Col, Statistic } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined, BookOutlined, VideoCameraOutlined, PlayCircleOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import YearPlanBubbleChart from './YearPlanBubbleChart';
+
 interface Stats {
   completed: number;
   incomplete: number;
@@ -13,7 +14,7 @@ interface Stats {
 
 const DailyPlanStats: React.FC = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
-  const [yearPlans,setYearPlans]= useState<Plan[]>([]);
+  const [yearPlans, setYearPlans] = useState<Plan[]>([]);
   const [stats, setStats] = useState<Stats>({ completed: 0, incomplete: 0 });
   const [entries, setEntries] = useState<ReadingEntry[]>([]);
 
@@ -21,7 +22,7 @@ const DailyPlanStats: React.FC = () => {
     const loadedPlans = loadPlans('dayPlans');
     setPlans(loadedPlans);
     setEntries(loadReadingEntry('readingEntries'));
-    setYearPlans(loadPlans('yearPlans'))
+    setYearPlans(loadPlans('yearPlans'));
   }, []);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const DailyPlanStats: React.FC = () => {
     <div>
       <h2>统计信息</h2>
       <Row gutter={[16, 16]}>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic
               title="完成任务数量"
@@ -49,7 +50,7 @@ const DailyPlanStats: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic
               title="未完成任务数量"
@@ -59,7 +60,7 @@ const DailyPlanStats: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic
               title="阅读数量"
@@ -68,7 +69,7 @@ const DailyPlanStats: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic
               title="观影数量"
@@ -77,7 +78,7 @@ const DailyPlanStats: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic
               title="动漫数量"
@@ -86,7 +87,7 @@ const DailyPlanStats: React.FC = () => {
             />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic
               title="输入总时长"
@@ -98,7 +99,9 @@ const DailyPlanStats: React.FC = () => {
         </Col>
       </Row>
       <Row gutter={[16, 16]}>
-      <YearPlanBubbleChart plans={yearPlans}></YearPlanBubbleChart>
+        <Col xs={24}>
+          <YearPlanBubbleChart plans={yearPlans} />
+        </Col>
       </Row>
     </div>
   );

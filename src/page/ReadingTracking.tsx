@@ -15,6 +15,7 @@ import {
 import { PlusOutlined } from "@ant-design/icons";
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
+import './ReadingTracking.css'
 
 const { Option } = Select;
 
@@ -83,7 +84,7 @@ const ReadingTracking: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="reading">
       <h2>输入清单</h2>
       <Button
         type="primary"
